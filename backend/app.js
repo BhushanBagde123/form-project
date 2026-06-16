@@ -13,6 +13,29 @@ const db = mysql.createConnection({
   password: "password",
   database: "formdb"
 });
+// DB connection
+db.connect((err) => {
+  if (err) {
+    console.error("DB connection failed:", err);
+    return;
+  }
+
+  console.log("Connected to MySQL");
+
+  const createTableQuery = `
+    CREATE TABLE IF NOT EXISTS users (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      name VARCHAR(100) NOT NULL,
+      email VARCHAR(255) NOT NULL,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )
+  `;
+
+  db.query(createTableQuery, (err) => {
+    if (err) console.error(err);
+    else console.log("Users table ready");
+  });
+});
 
 // API
 app.post("/api/submit", (req, res) => {
