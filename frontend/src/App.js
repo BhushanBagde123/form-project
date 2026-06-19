@@ -15,7 +15,7 @@ function App() {
     e.preventDefault();
 
     try {
-      await axios.post("http://<ALB-DNS>/api/submit", form);
+      await axios.post("http://43.205.120.116:5000/api/submit", form);
       alert("Data submitted!");
     } catch (err) {
       console.log(err);
